@@ -59,11 +59,6 @@ public class MoviesFragment extends Fragment implements FetchMoviesTask.FetchMov
         mRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), getResources().getInteger(R.integer.grid_column_count)));
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setAdapter(mAdapter);
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
         fetchMovies(mSortBy);
     }
 
