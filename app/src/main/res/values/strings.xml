@@ -6,5 +6,6 @@
 
     <string name="most_popular">Most popular</string>
     <string name="top_rated">Highest-rated</string>
+    <string name="content_description_details_backdrop">Backdrop image for movie</string>
 
 </resources>

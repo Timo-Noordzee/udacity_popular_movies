@@ -1,71 +1,97 @@
 package com.northseadevs.popularmovies.utils;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.GridView;
 import android.widget.ImageView;
 
+import com.northseadevs.popularmovies.R;
 import com.northseadevs.popularmovies.movie.Movie;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MovieAdapter extends BaseAdapter {
+public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHolder> {
 
     private List<Movie> mMovies;
-    private Context mContext;
+    private MovieClickHandler mClickHandler;
 
-    public MovieAdapter(Context context) {
-        mContext = context;
+    public interface MovieClickHandler {
+        void onMovieClicked(Movie movie);
+    }
+
+
+    public MovieAdapter(MovieClickHandler clickHandler) {
+        mClickHandler = clickHandler;
         mMovies = new ArrayList<Movie>();
         notifyDataSetChanged();
     }
 
-    public MovieAdapter(Context context, List<Movie> movies){
-        mContext = context;
+    public MovieAdapter(MovieClickHandler clickHandler, List<Movie> movies) {
+        mClickHandler = clickHandler;
         mMovies = movies;
         notifyDataSetChanged();
     }
 
+    class MovieViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
+        private ImageView mPoster;
+
+        MovieViewHolder(View itemView) {
+            super(itemView);
+            mPoster = itemView.findViewById(R.id.iv_movie_list_item_poster);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            int adapterPosition = getAdapterPosition();
+            Movie movie = mMovies.get(adapterPosition);
+            mClickHandler.onMovieClicked(movie);
+        }
+    }
+
+    @NonNull
     @Override
-    public int getCount() {
+    public MovieViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        Context context = parent.getContext();
+        int grid_column_count = context.getResources().getInteger(R.integer.grid_column_count);
+
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View view = inflater.inflate(R.layout.movie, parent, false);
+        view.getLayoutParams().height = (int) (parent.getWidth() / grid_column_count * Movie.POSTER_ASPECT_RATIO);
+
+        return new MovieViewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull MovieViewHolder holder, int position) {
+        Movie movie = mMovies.get(position);
+        Log.d(getClass().getSimpleName(), "Loading image for " + movie.getOriginalTitle() + "...");
+
+        Picasso.get().load(movie.getPoster()).into(holder.mPoster);
+    }
+
+    @Override
+    public void onViewRecycled(@NonNull MovieViewHolder holder) {
+        super.onViewRecycled(holder);
+        Picasso.get().cancelRequest(holder.mPoster);
+    }
+
+    @Override
+    public int getItemCount() {
+        if(mMovies == null) return 0;
         return mMovies.size();
     }
 
-    @Override
-    public Movie getItem(int position) {
-        return mMovies.get(position);
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return 0;
-    }
-
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        ImageView imageView;
-        Movie movie = getItem(position);
-        if(convertView == null) {
-            imageView = new ImageView(mContext);
-            imageView.setLayoutParams(new GridView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-            imageView.setAdjustViewBounds(true);
-            imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
-            //imageView.setPadding(8, 8, 8, 8);
-        } else {
-            imageView = (ImageView) convertView;
-        }
-        Picasso.get().load(movie.getImage()).into(imageView);
-        return imageView;
-    }
-
-    public void setMovieData(List<Movie> movies){
+    public void setMovieData(List<Movie> movies) {
+        Log.d(getClass().getSimpleName(), "Changed contents of adapter, " + movies.size() + " movies loaded!");
         this.mMovies = movies;
         notifyDataSetChanged();
     }
-
-
 }
