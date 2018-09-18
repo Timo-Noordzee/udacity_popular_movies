@@ -25,7 +25,7 @@ public class FetchMoviesTask extends AsyncTask<Void, Void, List<Movie>> {
     private static final String BASE_URL = "https://api.themoviedb.org";
 
     private String mSortBy;
-    private static FetchMoviesCallback mFetchMoviesCallback;
+    private FetchMoviesCallback mFetchMoviesCallback;
 
     public interface FetchMoviesCallback {
         void onMoviesFetched(List<Movie> movies);

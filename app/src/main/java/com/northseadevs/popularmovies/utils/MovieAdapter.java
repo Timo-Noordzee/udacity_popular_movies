@@ -90,7 +90,6 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
     }
 
     public void setMovieData(List<Movie> movies) {
-        Log.d(getClass().getSimpleName(), "Changed contents of adapter, " + movies.size() + " movies loaded!");
         this.mMovies = movies;
         notifyDataSetChanged();
     }

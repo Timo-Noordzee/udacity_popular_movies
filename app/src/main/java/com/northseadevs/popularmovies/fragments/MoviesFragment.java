@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.northseadevs.popularmovies.DetailsActivity;
 import com.northseadevs.popularmovies.MainActivity;
@@ -31,8 +32,10 @@ public class MoviesFragment extends Fragment implements FetchMoviesTask.FetchMov
 
     @BindView(R.id.rv_movies)
     RecyclerView mRecyclerView;
-    @BindView(R.id.progressBar_movies)
-    ProgressBar mProgressBar;
+    @BindView(R.id.pb_loading_movies_indicator)
+    ProgressBar mLoadingMoviesIndicator;
+    @BindView(R.id.tv_loading_movies_indicator)
+    TextView mLoadingMoviesText;
 
     private String mSortBy = FetchMoviesTask.MOST_POPULAR;
     private MovieAdapter mAdapter;
@@ -64,14 +67,16 @@ public class MoviesFragment extends Fragment implements FetchMoviesTask.FetchMov
 
     //Fetch movies using the TheMovieDatabase API
     private void fetchMovies(String sortBy) {
-        mProgressBar.setVisibility(View.VISIBLE);
+        mLoadingMoviesIndicator.setVisibility(View.VISIBLE);
+        mLoadingMoviesText.setVisibility(View.VISIBLE);
         FetchMoviesTask fetchMoviesTask = new FetchMoviesTask(sortBy, this);
         fetchMoviesTask.execute();
     }
 
     @Override
     public void onMoviesFetched(List<Movie> movies) {
-        mProgressBar.setVisibility(View.GONE);
+        mLoadingMoviesIndicator.setVisibility(View.GONE);
+        mLoadingMoviesText.setVisibility(View.GONE);
         mAdapter.setMovieData(movies);
         Log.d(getClass().getSimpleName(), mSortBy + " Movie count: " + movies.size());
     }

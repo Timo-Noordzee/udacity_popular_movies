@@ -12,6 +12,9 @@ public class Movie implements Parcelable {
     private static final String BASE_POSTER_URL = "http://image.tmdb.org/t/p/w342";
     private static final String BASE_BACKDROP_URL = "http://image.tmdb.org/t/p/w780";
 
+    private static final int RATING_RANGE = 10;
+    private static final int NUM_OF_STARS = 5;
+
     @SerializedName("original_title")
     private String originalTitle;
     @SerializedName("poster_path")
@@ -68,6 +71,14 @@ public class Movie implements Parcelable {
 
     public String getBackdrop() {
         return BASE_BACKDROP_URL + backdrop;
+    }
+
+    public float getRating() {
+        return rating;
+    }
+
+    public float getRating(boolean scaled){
+        return scaled ? (rating/ RATING_RANGE * NUM_OF_STARS) : rating;
     }
 
     public static final Parcelable.Creator<Movie> CREATOR = new Parcelable.Creator<Movie>() {

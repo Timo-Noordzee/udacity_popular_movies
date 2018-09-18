@@ -37,12 +37,9 @@ public class MainActivity extends AppCompatActivity {
 
         mViewPageAdapter.addFragment(MoviesFragment.newInstance(FetchMoviesTask.MOST_POPULAR), getString(R.string.most_popular));
         mViewPageAdapter.addFragment(MoviesFragment.newInstance(FetchMoviesTask.TOP_RATED), getString(R.string.top_rated));
-        mViewPageAdapter.addFragment(MoviesFragment.newInstance(FetchMoviesTask.TOP_RATED), getString(R.string.top_rated));
 
         mViewPager.setAdapter(mViewPageAdapter);
         mTabLayout.setupWithViewPager(mViewPager);
-
-        mViewPageAdapter.notifyDataSetChanged();
 
         setSupportActionBar(mToolbar);
     }
