@@ -1,41 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    xmlns:tools="http://schemas.android.com/tools">
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-    <TextView
-        android:id="@+id/tv_movie_title"
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:padding="16dp"
-        android:textStyle="bold"
-        tools:text="Jurassic World: Fallen Kingdom" />
+        android:orientation="vertical">
 
-    <RatingBar
-        android:id="@+id/rb_movie_rating"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        app:layout_anchor="@id/tv_movie_title"
-        android:isIndicator="true"
-        android:numStars="5"
-        android:rating="3.2"
-        android:stepSize="0.5"
-        app:layout_anchorGravity="bottom" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:baselineAligned="false"
+            android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/tv_rating_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center|bottom"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textSize="24sp"
-        app:layout_anchor="@id/rb_movie_rating"
-        app:layout_anchorGravity="bottom|center_horizontal"
-        tools:text="8.4 / 10" />
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="40"
+                android:paddingTop="16dp">
+
+                <ImageView
+                    android:id="@+id/iv_details_movie_poster"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:contentDescription="@string/content_description_movie_poster"
+                    android:scaleType="centerCrop"
+                    app:srcCompat="@drawable/placeholder_movie_poster" />
+            </FrameLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="60">
+
+                <TextView
+                    android:id="@+id/tv_details_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="16dp"
+                    android:padding="16dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                    tools:text="Jurassic World: Fallen Kingdom" />
+
+                <TextView
+                    android:id="@+id/tv_details_release_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_details_title"
+                    android:layout_marginLeft="16dp"
+                    tools:text="March 2018" />
+
+                <TextView
+                    android:id="@+id/tv_details_rating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/tv_details_release_date"
+                    android:layout_alignStart="@+id/tv_details_release_date"
+                    android:layout_below="@+id/tv_details_release_date"
+                    android:layout_marginTop="8dp"
+                    tools:text="Rating: 8.5" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_details_plot"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                tools:text='When a young nun at a cloistered abbey in Romania takes her own life, a priest with a haunted past and a novitiate on the threshold of her final vows are sent by the Vatican to investigate. Together they uncover the order’s unholy secret. Risking not only their lives but their faith and their very souls, they confront a malevolent force in the form of the same demonic nun that first terrorized audiences in “The Conjuring 2,” as the abbey becomes a horrific battleground between the living and the damned.' />
+        </LinearLayout>
+
+    </LinearLayout>
+
 
 </android.support.design.widget.CoordinatorLayout>

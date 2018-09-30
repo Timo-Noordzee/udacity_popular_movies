@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/movie_list_fragment"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_movies"
         android:layout_width="match_parent"
-        android:clipToPadding="false"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:clipToPadding="false" />
 
     <ProgressBar
         android:id="@+id/pb_loading_movies_indicator"
@@ -17,15 +18,29 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"/>
+        android:layout_centerVertical="true"
+        android:layout_gravity="center" />
 
     <TextView
         android:id="@+id/tv_loading_movies_indicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/pb_loading_movies_indicator"
-        android:text="@string/loading_movies"
+        android:layout_centerHorizontal="true"
         android:paddingTop="8dp"
-        android:layout_centerHorizontal="true"/>
+        android:text="@string/loading_movies"
+        android:layout_gravity="bottom|center"
+        app:layout_anchor="@id/pb_loading_movies_indicator"
+        app:layout_anchorGravity="bottom|center_horizontal" />
 
-</RelativeLayout>
+    <ImageView
+        android:id="@+id/iv_no_internet"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_gravity="center"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_signal_cellular_connected_no_internet"
+        android:tint="@android:color/darker_gray"
+        android:visibility="gone" />
+
+</android.support.design.widget.CoordinatorLayout>

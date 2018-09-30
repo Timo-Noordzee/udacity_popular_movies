@@ -8,5 +8,9 @@
     <string name="top_rated">Highest-rated</string>
     <string name="content_description_details_backdrop">Backdrop image for movie</string>
     <string name="loading_movies">Loading movies</string>
+    <string name="content_description_movie_poster">Movie cover</string>
+    
+    <string name="rating">Rating: %1$.1f</string>
+    <string name="error_no_internet">Failed, no internet connection</string>
 
 </resources>

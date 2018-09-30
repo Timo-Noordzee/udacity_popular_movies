@@ -5,6 +5,11 @@ import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class Movie implements Parcelable {
 
     public static final float POSTER_ASPECT_RATIO = 1.5f;
@@ -24,7 +29,7 @@ public class Movie implements Parcelable {
     @SerializedName("overview")
     private String plot;
     @SerializedName("vote_average")
-    private float rating;
+    private double rating;
     @SerializedName("release_date")
     private String release_date;
 
@@ -42,7 +47,7 @@ public class Movie implements Parcelable {
         poster = in.readString();
         backdrop = in.readString();
         plot = in.readString();
-        rating = in.readFloat();
+        rating = in.readDouble();
         release_date = in.readString();
     }
 
@@ -52,7 +57,7 @@ public class Movie implements Parcelable {
         parcel.writeString(poster);
         parcel.writeString(backdrop);
         parcel.writeString(plot);
-        parcel.writeFloat(rating);
+        parcel.writeDouble(rating);
         parcel.writeString(release_date);
     }
 
@@ -73,11 +78,28 @@ public class Movie implements Parcelable {
         return BASE_BACKDROP_URL + backdrop;
     }
 
-    public float getRating() {
+    public String getPlot() {
+        return plot;
+    }
+
+    public String getRelease_date() {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        try {
+            Date date = simpleDateFormat.parse(release_date);
+            simpleDateFormat = new SimpleDateFormat("MMMM yyyy", Locale.getDefault());
+            return simpleDateFormat.format(date);
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return release_date;
+    }
+
+    public double getRating() {
         return rating;
     }
 
-    public float getRating(boolean scaled){
+    public double getRating(boolean scaled){
         return scaled ? (rating/ RATING_RANGE * NUM_OF_STARS) : rating;
     }
 

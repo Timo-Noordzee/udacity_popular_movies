@@ -1,16 +1,18 @@
 package com.northseadevs.popularmovies.fragments;
 
+import android.content.BroadcastReceiver;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -32,12 +34,15 @@ public class MoviesFragment extends Fragment implements FetchMoviesTask.FetchMov
 
     @BindView(R.id.rv_movies)
     RecyclerView mRecyclerView;
+    @BindView(R.id.iv_no_internet)
+    ImageView mNoInternet;
     @BindView(R.id.pb_loading_movies_indicator)
     ProgressBar mLoadingMoviesIndicator;
     @BindView(R.id.tv_loading_movies_indicator)
     TextView mLoadingMoviesText;
 
     private String mSortBy = FetchMoviesTask.MOST_POPULAR;
+    private BroadcastReceiver receiver;
     private MovieAdapter mAdapter;
 
     @Nullable
@@ -75,10 +80,22 @@ public class MoviesFragment extends Fragment implements FetchMoviesTask.FetchMov
 
     @Override
     public void onMoviesFetched(List<Movie> movies) {
-        mLoadingMoviesIndicator.setVisibility(View.GONE);
-        mLoadingMoviesText.setVisibility(View.GONE);
-        mAdapter.setMovieData(movies);
-        Log.d(getClass().getSimpleName(), mSortBy + " Movie count: " + movies.size());
+        if(movies != null) {
+            mLoadingMoviesIndicator.setVisibility(View.GONE);
+            mLoadingMoviesText.setVisibility(View.GONE);
+            mNoInternet.setVisibility(View.GONE);
+            mAdapter.setMovieData(movies);
+        } else {
+            mLoadingMoviesIndicator.setVisibility(View.GONE);
+            mLoadingMoviesText.setText(getString(R.string.error_no_internet));
+            mNoInternet.setVisibility(View.VISIBLE);
+            Snackbar.make(getView().findViewById(R.id.movie_list_fragment), "No internet", Snackbar.LENGTH_INDEFINITE).setAction("Retry", new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    fetchMovies(mSortBy);
+                }
+            }).show();
+        }
     }
 
     @Override

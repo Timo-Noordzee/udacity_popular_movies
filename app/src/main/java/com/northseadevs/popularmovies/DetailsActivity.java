@@ -6,15 +6,12 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.v4.widget.TextViewCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ImageView;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.northseadevs.popularmovies.movie.Movie;
@@ -36,10 +33,16 @@ public class DetailsActivity extends AppCompatActivity {
     @BindView(R.id.details_collapsing_toolbar_layout)
     CollapsingToolbarLayout collapsingToolbarLayout;
 
-    @BindView(R.id.tv_movie_title)
+    @BindView(R.id.tv_details_title)
     TextView mMovieTitle;
-    @BindView(R.id.rb_movie_rating)
-    RatingBar mMovieRating;
+    @BindView(R.id.tv_details_plot)
+    TextView mMoviePlot;
+    @BindView(R.id.tv_details_release_date)
+    TextView mMovieReleaseDate;
+    @BindView(R.id.tv_details_rating)
+    TextView mMovieRating;
+    @BindView(R.id.iv_details_movie_poster)
+    ImageView mMoviePoster;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +50,8 @@ public class DetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_details);
 
         ButterKnife.bind(this);
+
+
 
         Intent intent = getIntent();
         if (intent.hasExtra(MainActivity.INTENT_MOVIE_KEY)) {
@@ -57,14 +62,17 @@ public class DetailsActivity extends AppCompatActivity {
 
         if (mMovie != null) populateUI();
 
-        setupActionBar();
     }
 
     private void populateUI() {
+        setupActionBar();
         Picasso.get().load(mMovie.getBackdrop()).into(movieBackdrop);
+        Picasso.get().load(mMovie.getPoster()).into(mMoviePoster);
+
         mMovieTitle.setText(mMovie.getOriginalTitle());
-        TextViewCompat.setAutoSizeTextTypeWithDefaults(mMovieTitle, TextViewCompat.AUTO_SIZE_TEXT_TYPE_UNIFORM);
-        mMovieRating.setRating(mMovie.getRating(true));
+        mMoviePlot.setText(mMovie.getPlot());
+        mMovieReleaseDate.setText(mMovie.getRelease_date());
+        mMovieRating.setText(getString(R.string.rating, mMovie.getRating()));
     }
 
     private void setupActionBar() {
@@ -74,29 +82,10 @@ public class DetailsActivity extends AppCompatActivity {
             getWindow().setStatusBarColor(Color.TRANSPARENT);
 
         ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) actionBar.setDisplayHomeAsUpEnabled(true);
-
-        //Register the scroll listener to hide the toolbar title
-        appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
-            boolean isShow = false;
-            int scrollRange = -1;
-
-            @Override
-            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-                if (scrollRange == -1) {
-                    scrollRange = appBarLayout.getTotalScrollRange();
-                }
-                if (scrollRange + verticalOffset == 0) {
-                    collapsingToolbarLayout.setTitle(mMovie.getOriginalTitle());
-                    mMovieTitle.setVisibility(View.GONE);
-                    isShow = false;
-                } else if (!isShow) {
-                    collapsingToolbarLayout.setTitle(" "); // Careful! There should be a space between double quote. Otherwise it won't work.
-                    mMovieTitle.setVisibility(View.VISIBLE);
-                    isShow = true;
-                }
-            }
-        });
+        if (actionBar != null){
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setTitle(mMovie.getOriginalTitle());
+        }
     }
 
     @Override
