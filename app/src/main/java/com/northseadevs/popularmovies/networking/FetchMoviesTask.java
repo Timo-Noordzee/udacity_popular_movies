@@ -1,7 +1,6 @@
 package com.northseadevs.popularmovies.networking;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
 import com.northseadevs.popularmovies.BuildConfig;
 import com.northseadevs.popularmovies.movie.Movie;
@@ -51,7 +50,6 @@ public class FetchMoviesTask extends AsyncTask<Void, Void, List<Movie>> {
             Call<Movies> call = databaseQuery.loadMovies(mSortBy, BuildConfig.API_KEY);
 
             try {
-                Log.d(getClass().getSimpleName(), "Fetching movies from remote database...");
                 Response<Movies> response = call.execute();
                 Movies movies = response.body();
                 if (movies != null && movies.getMovies().size() > 0) {

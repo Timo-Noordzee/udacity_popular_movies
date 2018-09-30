@@ -22,7 +22,7 @@
             android:fitsSystemWindows="true"
             android:minHeight="64dp"
             app:contentScrim="?attr/colorPrimary"
-            app:layout_scrollFlags="enterAlways|enterAlwaysCollapsed">
+            app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed">
 
             <ImageView
                 android:id="@+id/iv_details_movie_backdrop"

@@ -67,7 +67,7 @@ public class DetailsActivity extends AppCompatActivity {
     private void populateUI() {
         setupActionBar();
         Picasso.get().load(mMovie.getBackdrop()).into(movieBackdrop);
-        Picasso.get().load(mMovie.getPoster()).into(mMoviePoster);
+        Picasso.get().load(mMovie.getPoster()).placeholder(R.drawable.placeholder_movie_poster).into(mMoviePoster);
 
         mMovieTitle.setText(mMovie.getOriginalTitle());
         mMoviePlot.setText(mMovie.getPlot());
