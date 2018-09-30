@@ -27,13 +27,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
 
     public MovieAdapter(MovieClickHandler clickHandler) {
         mClickHandler = clickHandler;
-        mMovies = new ArrayList<Movie>();
-        notifyDataSetChanged();
-    }
-
-    public MovieAdapter(MovieClickHandler clickHandler, List<Movie> movies) {
-        mClickHandler = clickHandler;
-        mMovies = movies;
+        mMovies = new ArrayList<>();
         notifyDataSetChanged();
     }
 

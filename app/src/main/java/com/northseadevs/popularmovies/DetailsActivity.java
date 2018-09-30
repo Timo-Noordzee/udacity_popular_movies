@@ -55,7 +55,7 @@ public class DetailsActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         if (intent.hasExtra(MainActivity.INTENT_MOVIE_KEY)) {
-            mMovie = (Movie) intent.getParcelableExtra(MainActivity.INTENT_MOVIE_KEY);
+            mMovie = intent.getParcelableExtra(MainActivity.INTENT_MOVIE_KEY);
         } else {
             Log.d("Details", "No movie found!");
         }

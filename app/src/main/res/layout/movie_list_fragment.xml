@@ -27,9 +27,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/pb_loading_movies_indicator"
         android:layout_centerHorizontal="true"
+        android:layout_gravity="bottom|center"
         android:paddingTop="8dp"
         android:text="@string/loading_movies"
-        android:layout_gravity="bottom|center"
         app:layout_anchor="@id/pb_loading_movies_indicator"
         app:layout_anchorGravity="bottom|center_horizontal" />
 
@@ -38,6 +38,7 @@
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:layout_gravity="center"
+        android:contentDescription="@string/content_description_no_internet_connection"
         android:scaleType="fitXY"
         android:src="@drawable/ic_signal_cellular_connected_no_internet"
         android:tint="@android:color/darker_gray"

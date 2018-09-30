@@ -24,8 +24,6 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.vp_main)
     ViewPager mViewPager;
 
-    private ViewPageAdapter mViewPageAdapter;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-        mViewPageAdapter = new ViewPageAdapter(getSupportFragmentManager());
+        ViewPageAdapter mViewPageAdapter = new ViewPageAdapter(getSupportFragmentManager());
 
         mViewPageAdapter.addFragment(MoviesFragment.newInstance(FetchMoviesTask.MOST_POPULAR), getString(R.string.most_popular));
         mViewPageAdapter.addFragment(MoviesFragment.newInstance(FetchMoviesTask.TOP_RATED), getString(R.string.top_rated));

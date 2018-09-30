@@ -1,6 +1,5 @@
 package com.northseadevs.popularmovies.fragments;
 
-import android.content.BroadcastReceiver;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -42,7 +41,6 @@ public class MoviesFragment extends Fragment implements FetchMoviesTask.FetchMov
     TextView mLoadingMoviesText;
 
     private String mSortBy = FetchMoviesTask.MOST_POPULAR;
-    private BroadcastReceiver receiver;
     private MovieAdapter mAdapter;
 
     @Nullable

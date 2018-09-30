@@ -57,7 +57,7 @@ public class FetchMoviesTask extends AsyncTask<Void, Void, List<Movie>> {
                 if (movies != null && movies.getMovies().size() > 0) {
                     return movies.getMovies();
                 } else {
-                    return new ArrayList<Movie>();
+                    return new ArrayList<>();
                 }
             } catch (IOException e) {
                 e.printStackTrace();
