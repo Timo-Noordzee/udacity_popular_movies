@@ -3,6 +3,7 @@ package com.northseadevs.popularmovies.utils;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,7 +66,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
     @Override
     public void onBindViewHolder(@NonNull MovieViewHolder holder, int position) {
         Movie movie = mMovies.get(position);
-        Picasso.get().load(movie.getPoster()).into(holder.mPoster);
+        Log.d("Adapter", "Loading poster: " + movie.getPoster());
+        Picasso.get().load(movie.getPosterUrl()).into(holder.mPoster);
     }
 
     @Override

@@ -3,11 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -34,7 +35,7 @@
                     app:srcCompat="@drawable/placeholder_movie_poster" />
             </FrameLayout>
 
-            <RelativeLayout
+            <android.support.constraint.ConstraintLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="60">
@@ -45,30 +46,56 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:layout_marginTop="16dp"
-                    android:padding="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginRight="16dp"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
                     android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
                     tools:text="Jurassic World: Fallen Kingdom" />
 
                 <TextView
                     android:id="@+id/tv_details_release_date"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tv_details_title"
-                    android:layout_marginLeft="16dp"
                     android:layout_marginStart="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintStart_toStartOf="@+id/tv_details_title"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_details_title"
                     tools:text="March 2018" />
 
                 <TextView
                     android:id="@+id/tv_details_rating"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignLeft="@+id/tv_details_release_date"
-                    android:layout_alignStart="@+id/tv_details_release_date"
                     android:layout_below="@+id/tv_details_release_date"
+                    android:layout_alignStart="@+id/tv_details_release_date"
+                    android:layout_alignLeft="@+id/tv_details_release_date"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginLeft="16dp"
                     android:layout_marginTop="8dp"
+                    app:layout_constraintStart_toStartOf="@+id/tv_details_title"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_details_release_date"
                     tools:text="Rating: 8.5" />
 
-            </RelativeLayout>
+                <ImageView
+                    android:id="@+id/iv_details_favourite"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_below="@id/tv_details_rating"
+                    android:layout_alignStart="@+id/tv_details_release_date"
+                    android:layout_alignLeft="@+id/tv_details_release_date"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:src="@drawable/ic_favorite_border"
+                    android:tint="@color/colorPrimary"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/tv_details_title" />
+
+            </android.support.constraint.ConstraintLayout>
 
         </LinearLayout>
 
@@ -83,7 +110,14 @@
                 android:layout_marginTop="16dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 tools:text='When a young nun at a cloistered abbey in Romania takes her own life, a priest with a haunted past and a novitiate on the threshold of her final vows are sent by the Vatican to investigate. Together they uncover the order’s unholy secret. Risking not only their lives but their faith and their very souls, they confront a malevolent force in the form of the same demonic nun that first terrorized audiences in “The Conjuring 2,” as the abbey becomes a horrific battleground between the living and the damned.' />
+
         </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_reviews"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     </LinearLayout>
 

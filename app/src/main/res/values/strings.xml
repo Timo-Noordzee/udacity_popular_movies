@@ -10,9 +10,13 @@
     <string name="content_description_movie_poster">Movie cover</string>
     <string name="content_description_movie_backdrop">Backdrop image for movie</string>
     <string name="content_description_no_internet_connection">No internet connection icon</string>
+
+    <string name="no_trailer_found">No trailer available for this movie!</string>
     
     <string name="rating">Rating: %1$.1f</string>
     <string name="loading_movies">Loading movies</string>
     <string name="error_no_internet">Failed, no internet connection</string>
+    <string name="error_no_favourites">No favourite movies yet</string>
+    <string name="favourites">Favourites</string>
 
 </resources>

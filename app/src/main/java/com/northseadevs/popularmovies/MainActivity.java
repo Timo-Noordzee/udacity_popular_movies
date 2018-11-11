@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import com.northseadevs.popularmovies.fragments.MoviesFragment;
-import com.northseadevs.popularmovies.networking.FetchMoviesTask;
+import com.northseadevs.popularmovies.networking.TheMovieDatabaseQuery;
 import com.northseadevs.popularmovies.utils.ViewPageAdapter;
 
 import butterknife.BindView;
@@ -33,8 +33,9 @@ public class MainActivity extends AppCompatActivity {
 
         ViewPageAdapter mViewPageAdapter = new ViewPageAdapter(getSupportFragmentManager());
 
-        mViewPageAdapter.addFragment(MoviesFragment.newInstance(FetchMoviesTask.MOST_POPULAR), getString(R.string.most_popular));
-        mViewPageAdapter.addFragment(MoviesFragment.newInstance(FetchMoviesTask.TOP_RATED), getString(R.string.top_rated));
+        mViewPageAdapter.addFragment(MoviesFragment.newInstance(TheMovieDatabaseQuery.MOST_POPULAR), getString(R.string.most_popular));
+        mViewPageAdapter.addFragment(MoviesFragment.newInstance(TheMovieDatabaseQuery.TOP_RATED), getString(R.string.top_rated));
+        mViewPageAdapter.addFragment(MoviesFragment.newInstance(TheMovieDatabaseQuery.FAVORITES), getString(R.string.favourites));
 
         mViewPager.setAdapter(mViewPageAdapter);
         mTabLayout.setupWithViewPager(mViewPager);

@@ -25,7 +25,7 @@
         android:id="@+id/tv_loading_movies_indicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/pb_loading_movies_indicator"
+        android:layout_below="@id/iv_no_internet"
         android:layout_centerHorizontal="true"
         android:layout_gravity="bottom|center"
         android:paddingTop="8dp"
@@ -42,6 +42,6 @@
         android:scaleType="fitXY"
         android:src="@drawable/ic_signal_cellular_connected_no_internet"
         android:tint="@android:color/darker_gray"
-        android:visibility="gone" />
+        android:visibility="invisible" />
 
 </android.support.design.widget.CoordinatorLayout>

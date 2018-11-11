@@ -77,7 +77,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/device/ic_signal_cellular_connected_no_internet_0_bar_black_24dp.xml" />
+                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/action/ic_favorite_border_black_24dp.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -87,8 +87,9 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="color" value="ffffff" />
-                            <entry key="outputName" value="ic_signal_cellular_connected_no_internet" />
+                            <entry key="autoMirrored" value="true" />
+                            <entry key="opacityPercent" value="80" />
+                            <entry key="outputName" value="ic_favorite_border" />
                             <entry key="sourceFile" value="C:\Users\timo_" />
                           </map>
                         </option>

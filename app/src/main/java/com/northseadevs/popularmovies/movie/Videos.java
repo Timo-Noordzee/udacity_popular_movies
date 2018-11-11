@@ -3,13 +3,14 @@ package com.northseadevs.popularmovies.movie;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class Movies {
+public class Videos {
 
     @SerializedName("results")
-    private ArrayList<Movie> movies = new ArrayList<>();
+    private List<Video> videos = new ArrayList<>();
 
-    public ArrayList<Movie> getMovies(){
-        return movies;
+    public List<Video> getVideos() {
+        return videos;
     }
 }
